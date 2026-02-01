@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BLUEMETZ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      :root {
+        --bg: #f2f2f0;
+        --text: #1e1e1e;
+        --muted: #6c6c6c;
+        --line: rgba(0, 0, 0, 0.18);
+        --blue: #0d4ea6;
+
+        --radius: 14px;
+
+        --left-w: 420px;
+        --gutter: 88px;
+        --content-w: 1120px;
+        --top-gap: 64px; /* 왼쪽/오른쪽 상단 여백 */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto,
+          "Malgun Gothic", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow: hidden; /* ✅ 바깥 스크롤 제거 */
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ✅ 이 컨테이너가 "유일한" 스크롤 영역 */
+      .viewport {
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* 레이아웃: 왼쪽 + 오른쪽 + (푸터는 전체폭) */
+      .layout {
+        display: grid;
+        grid-template-columns: var(--left-w) 1fr;
+        align-items: start;
+        min-height: 100vh;
+      }
+
+      /* ===== LEFT (sticky) ===== */
+      aside.left {
+        position: sticky;
+        top: 0; /* ✅ viewport 상단에 붙음 */
+        height: 100vh; /* ✅ 화면 높이만큼 */
+        padding: var(--top-gap) 0 64px 100px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+
+        background: var(--bg);
+        z-index: 10;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .brand .logo {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .brand .mark {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+      }
+      .brand .mark svg {
+        width: 44px;
+        height: 44px;
+        fill: var(--blue);
+      }
+      .brand .name {
+        font-weight: 700;
+        letter-spacing: -0.6px;
+        font-size: 44px;
+        line-height: 1;
+        color: var(--blue);
+      }
+      .brand .desc {
+        font-size: 12px;
+        line-height: 1.65;
+        color: var(--muted);
+        max-width: 400px;
+      }
+
+      nav.nav {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        color: rgba(0, 0, 0, 0.55);
+      }
+      nav.nav a {
+        width: max-content;
+        padding: 4px 0;
+        position: relative;
+      }
+      nav.nav a.active {
+        color: rgba(0, 0, 0, 0.85);
+      }
+      nav.nav a.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.55);
+      }
+
+      /* ===== RIGHT ===== */
+      main.right {
+        padding: var(--top-gap) var(--gutter) 0;
+        overflow-x: hidden; /* swiper 안전 */
+      }
+      .container {
+        width: min(var(--content-w), 100%);
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        font-size: 44px;
+        font-weight: 300;
+        letter-spacing: -0.4px;
+        margin: 0;
+        color: rgba(0, 0, 0, 0.58);
+      }
+      .section-sub {
+        margin: 10px 0 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.45);
+        line-height: 1.6;
+
+      }
+
+      /* HERO */
+      .hero {
+        padding-top: 10px;
+        padding-bottom: 40px;
+      }
+      .hero .hero-swiper {
+        width: min(980px, 100%);
+        margin-left: auto;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+        background: #ddd;
+        position: relative;
+        isolation: isolate;
+      }
+      .hero .swiper {
+        width: 100%;
+        overflow: hidden;
+      }
+      .hero .swiper-slide {
+        aspect-ratio: 16/9;
+      }
+      .hero .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero .swiper-button-prev,
+      .hero .swiper-button-next {
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      }
+      .hero .swiper-button-prev {
+        left: 16px;
+      }
+      .hero .swiper-button-next {
+        right: 16px;
+      }
+      .hero .swiper-pagination {
+        bottom: 14px !important;
+      }
+      .hero .swiper-pagination-bullet {
+        opacity: 0.5;
+      }
+      .hero .swiper-pagination-bullet-active {
+        opacity: 1;
+      }
+
+      /* Products */
+      .product-head {
+        padding-top: 54px;
+        text-align: center;
+      }
+      .product-head .section-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .gallery {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .thumb {
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ddd;
+        aspect-ratio: 16/9;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Stores */
+      .store-wrap {
+        display: grid;
+        grid-template-columns: 1.25fr 0.9fr;
+        gap: 44px;
+        align-items: end;
+        margin-top: 50px;
+      }
+      .store-wrap-right {
+        display: grid;
+        grid-template-columns: 0.9fr 1.25fr;
+        gap: 44px;
+        align-items: end;
+        margin-top: 100px;
+      }
+      .store-figure {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .store-photo {
+        width: 100%;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #ddd;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+        aspect-ratio: 4/3;
+      }
+      .store-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .vlabel {
+        position: relative;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        color: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        user-select: none;
+      }
+      .vlabel strong {
+        color: rgba(0, 0, 0, 0.7);
+        font-weight: 500;
+      }
+      .vlabel .bar {
+        width: 1px;
+        height: 84px;
+        background: rgba(0, 0, 0, 0.18);
+        margin: 10px 0;
+      }
+
+      .store-copy h3 {
+        margin: 0 0 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.75);
+      }
+      .store-copy p {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.7;
+        color: rgba(0, 0, 0, 0.45);
+        max-width: 460px;
+      }
+      .store-list {
+        margin-top: 28px;
+        border-top: 1px solid var(--line);
+      }
+      .store-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.55);
+      }
+      .store-row b {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.75);
+      }
+      .store-row span {
+        text-align: right;
+        color: rgba(0, 0, 0, 0.55);
+      }
+
+      /* Contact */
+      .contact-head {
+        text-align: center;
+        margin-top: 24px;
+      }
+      .contact-kicker {
+        margin: 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.45);
+        letter-spacing: 0.02em;
+      }
+      .contact-title {
+        margin: 6px 0 0;
+        font-size: 54px;
+        font-weight: 300;
+        color: rgba(0, 0, 0, 0.58);
+        letter-spacing: -0.6px;
+      }
+      .form {
+        width: min(620px, 100%);
+        margin: 38px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .field {
+        border: 1px solid var(--line);
+        background: transparent;
+        padding: 14px 16px;
+        font-size: 13px;
+        outline: none;
+      }
+      .field::placeholder {
+        color: rgba(0, 0, 0, 0.35);
+      }
+      textarea.field {
+        min-height: 180px;
+        resize: vertical;
+      }
+      .send {
+        margin-top: 6px;
+        height: 44px;
+        border: 0;
+        background: #1f2430;
+        color: #fff;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        cursor: pointer;
+      }
+
+      /* ✅ Footer: grid 전체폭 */
+      footer.site-footer {
+        grid-column: 1 / -1; /* ✅ 왼쪽+오른쪽 전체 */
+        margin-top: 70px;
+        padding: 40px 100px 46px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 11px;
+        line-height: 1.7;
+        background: var(--bg);
+      }
+/* Slide Panel */
+.panel {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.panel__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.panel__sheet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 80vw;
+  background: var(--bg);
+  box-shadow: -30px 0 80px rgba(0, 0, 0, 0.3);
+  transform: translateX(102%);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__inner {
+  padding: 64px 56px 48px;
+  background: var(--bg);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.panel__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.panel.is-open {
+  pointer-events: auto;
+}
+.panel.is-open .panel__backdrop {
+  opacity: 1;
+}
+.panel.is-open .panel__sheet {
+  transform: translateX(0);
+}
+
+      /* Mobile */
+      @media (max-width: 980px) {
+        :root {
+          --left-w: 0px;
+          --gutter: 22px;
+          --top-gap: 18px;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        aside.left {
+          position: sticky;
+          top: 0;
+          height: auto;
+          padding: 18px var(--gutter);
+          background: rgba(242, 242, 240, 0.92);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          z-index: 10;
+          gap: 16px;
+        }
+        .brand .name {
+          font-size: 28px;
+        }
+        .brand .desc {
+          max-width: none;
+        }
+
+        nav.nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          margin-top: 0;
+          gap: 14px;
+        }
+
+        main.right {
+          padding: 26px var(--gutter) 0;
+        }
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+        .store-wrap {
+          grid-template-columns: 1fr;
+        }
+        .vlabel {
+          display: none;
+        }
+        .contact-title {
+          font-size: 40px;
+        }
+
+        footer.site-footer {
+          padding: 26px var(--gutter) 34px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .panel__inner {
+    padding: 56px 20px 34px;
+  }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ✅ 유일한 스크롤 컨테이너 -->
+    <div class="viewport" id="viewport">
+      <div class="layout">
+        <!-- LEFT (Sticky) -->
+        <aside class="left">
+          <div class="brand">
+            <div class="logo">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path
+                    d="M32 14c6 0 10-4 14-4 3 0 6 2 6 5 0 5-6 9-14 9l-2 2v6c0 2-2 4-4 4s-4-2-4-4v-6l-2-2C18 24 12 20 12 15c0-3 3-5 6-5 4 0 8 4 14 4Z"
+                  />
+                  <path
+                    d="M20 36c0 10 6 16 12 16s12-6 12-16h-5c0 6-3 10-7 10s-7-4-7-10h-5Z"
+                  />
+                </svg>
+              </div>
+              <div class="name">BLUEMETZ</div>
+            </div>
+
+            <p class="desc">
+              진정한 맛은 본질을 지키는 정성에서 피어납니다.<br />
+              블루메쯔는 독일 전통 육가공 기술을 결합한 마이스터의 손길을
+              통해,<br />
+              고기와 소시지가 가진 본연의 아름다움을 식탁 위로 올립니다.
+            </p>
+          </div>
+
+          <nav class="nav" aria-label="Main">
+            <a href="#home" class="js-nav">HOME</a>
+            <a href="#about" class="js-nav">ABOUT</a>
+            <a href="#stores" class="js-nav">STORES</a>
+            <a href="#products" class="js-nav">PRODUCTS</a>
+            <a href="#contact" class="js-nav">CONTACT</a>
+          </nav>
+        </aside>
+
+        <!-- RIGHT -->
+        <main class="right">
+          <div class="container">
+            <section id="home" class="hero">
+              <div class="swiper hero-swiper" aria-label="Hero slider">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img
+                      src="assets/img/hero-1.jpg"
+                      alt="Hero 1"
+                    />
+                  </div>
+                  <div class="swiper-slide">
+                    <img
+                      src="assets/img/hero-2.jpg"
+                      alt="Hero 2"
+                    />
+                  </div>
+                  <div class="swiper-slide">
+                    <img
+                      src="assets/img/hero-3.jpg"
+                      alt="Hero 3"
+                    />
+                  </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div
+                  class="swiper-button-prev"
+                  aria-label="Previous slide"
+                ></div>
+                <div class="swiper-button-next" aria-label="Next slide"></div>
+              </div>
+            </section>
+
+            <section id="products">
+              <div class="product-head">
+                <h2 class="section-title">Our Bowls</h2>
+                <p class="section-sub">
+                  수 세기를 이어온 독일의 전통 레시피에, 누군가의 소중한 한 끼를
+                  생각하는 따뜻한 진심을 더했습니다.
+                </p>
+              </div>
+
+              <div class="gallery" aria-label="Product gallery">
+                <div class="thumb">
+                  <img
+                    src="assets/img/bowls-1.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="thumb">
+                  <img
+                    src="assets/img/bowls-2.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="thumb">
+                  <img
+                    src="assets/img/bowls-3.jpg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section id="stores">
+              <h2 class="section-title">Stores</h2>
+              <p class="section-sub">
+                가장 맛있는 순간이 가장 아름다운 기억으로 남을 수 있도록,
+                블루메쯔는 오늘도 마이스터의 조리소리를 삶의 장면으로
+                이어갑니다.
+              </p>
+
+              <div class="store-wrap">
+                <div class="store-figure">
+                  <div class="vlabel" style="margin-right:10px;" aria-hidden="true">
+                    <strong>[ BLUEMETZ GWANGHWAMUN BRANCH ]</strong>
+                    <div class="bar"></div>
+                    <span>02-725-6658</span>
+                  </div>
+
+                  <div class="store-photo">
+                    <img
+                      src="assets/img/store-1.jpg"
+                      alt="Store"
+                    />
+                  </div>
+                </div>
+
+                <div class="store-copy">
+                  <h3>블루메쯔 광화문점</h3>
+                  <p>
+                    우리나라의 역사의 한복판 광화문과 경희궁 사이에 자리잡은
+                    블루메쯔는 이제껏 쌓아온 육가공의 진수를 선보이는
+                    블루메쯔 퍼포먼스의 장으로 한층 더 다이나믹하고
+                    색다른 문화적인 공간으로 다가갑니다.</p>
+
+                  <div class="store-list" role="list">
+                    <div class="store-row" role="listitem">
+                      <b>블루메쯔 광화문점</b>
+                      <span
+                        >[ 서울 종로구 새문안로3길 11 ] | [ 02-725-6658 ]</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="store-wrap-right">
+
+                <div class="store-copy">
+                  <h3>블루메쯔 수내 본점</h3>
+                  <p>
+블루메쯔 수내점은 블루메쯔가 탄생한 곳으로,
+독일 마이스터와 숙성 전문가가 만나 선진화된 “고기 문화”를
+선보이는 공간으로 태어났습니다. 슈바인학세와 숙성 스테이크의
+원조가 수내동에 있습니다.</p>
+
+                  <div class="store-list" role="list">
+                    <div class="store-row" role="listitem">
+                      <b>블루메쯔 수내 본점</b>
+                      <span
+                        >[ 경기 성남시 분당구 발이봉남로25번길 2 1층 ] | [ 031-717-6658 ]</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="store-figure">
+
+                  <div class="store-photo">
+                    <img
+                      src="assets/img/store-2.jpg"
+                      alt="Store"
+                    />
+                  </div>
+                  <div class="vlabel" style="margin-left:10px;" aria-hidden="true">
+                    <strong>[ BLUEMETZ BUNDANG SUNAE BRANCH ]</strong>
+                    <div class="bar"></div>
+                    <span>031-717-6658</span>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            <section id="contact">
+              <div class="contact-head">
+                <p class="contact-kicker">Have an idea?</p>
+                <h2 class="contact-title">Contact Us</h2>
+              </div>
+
+              <form class="form" onsubmit="return handleSubmit(event)">
+                <input class="field" name="name" placeholder="Name" />
+                <input class="field" name="email" placeholder="Email" />
+                <textarea
+                  class="field"
+                  name="message"
+                  placeholder="Message"
+                ></textarea>
+                <button class="send" type="submit">SEND</button>
+              </form>
+            </section>
+          </div>
+        </main>
+      </div>
+      <!-- Slide Panel (Right Drawer) -->
+<div class="panel" id="panel" aria-hidden="true">
+    <div class="panel__backdrop" id="panelBackdrop"></div>
+  
+    <aside class="panel__sheet" role="dialog" aria-modal="true" aria-label="Content">
+      <button class="panel__close" id="panelClose" aria-label="Close">✕</button>
+      <div class="panel__inner" id="panelInner"></div>
+    </aside>
+  </div>
+  
+      <!-- ✅ Footer: layout 하단 전체폭 -->
+      <footer class="site-footer">
+        <div>
+          상호 : (주)한국바이에른식학교 &nbsp;&nbsp; 주소 : …<br />
+          사업자등록번호 : … &nbsp;&nbsp; 통신판매신고번호 : …<br />
+          개인정보관리책임자 : … &nbsp;&nbsp; 이메일 : …<br />
+          Copyright 2026 Bluemetz. All rights reserved.
+        </div>
+        <div style="text-align: right">
+          온라인 고객센터<br />
+          [ 031-584-6658 ]
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      const viewport = document.getElementById("viewport");
+
+      const heroSwiper = new Swiper(".hero-swiper", {
+        loop: true,
+        speed: 650,
+        autoplay: { delay: 3800, disableOnInteraction: false },
+        effect: "slide",
+        pagination: { el: ".hero .swiper-pagination", clickable: true },
+        navigation: {
+          nextEl: ".hero .swiper-button-next",
+          prevEl: ".hero .swiper-button-prev",
+        },
+      });
+
+
+  // ===== Slide Panel (Fetch) =====
+  const panel = document.getElementById("panel");
+  const panelInner = document.getElementById("panelInner");
+  const panelClose = document.getElementById("panelClose");
+  const panelBackdrop = document.getElementById("panelBackdrop");
+  const navLinks = Array.from(document.querySelectorAll(".js-nav"));
+
+  const PANEL_BASE = "/panel"; // 필요하면 "./panel" 로 바꿔도 됨
+  const cache = new Map(); // 간단 캐시
+
+  function setActive(linkEl) {
+    navLinks.forEach((a) => a.classList.remove("active"));
+    if (linkEl) linkEl.classList.add("active");
+  }
+
+  function openPanel() {
+    panel.classList.add("is-open");
+    panel.setAttribute("aria-hidden", "false");
+    viewport.style.overflow = "hidden"; // 뒤 스크롤 잠금
+  }
+
+  let isClosingByUI = false;
+
+function closePanel({ clearHash = true } = {}) {
+  panel.classList.remove("is-open");
+  panel.setAttribute("aria-hidden", "true");
+  viewport.style.overflow = "auto";
+
+  // active도 초기화(원하면 유지해도 됨)
+  setActive(null);
+
+  // ✅ URL을 index.html로 원복 (해시 제거)
+  if (clearHash && location.hash) {
+    isClosingByUI = true;
+
+    // 방법 A: 현재 히스토리 항목을 해시 없는 URL로 "교체" (뒤로가기 히스토리 꼬임 최소)
+    history.replaceState(null, "", location.pathname + location.search);
+
+    // popstate는 replaceState에서 안 뜨지만, 혹시 너 코드 흐름에서 popstate에 의존한다면 플래그만 유지
+    setTimeout(() => (isClosingByUI = false), 0);
+  }
+}
+
+
+  async function loadPanel(key) {
+    openPanel();
+    panelInner.innerHTML = "<p style='margin:0; color:rgba(0,0,0,.55)'>Loading…</p>";
+
+    if (cache.has(key)) {
+      panelInner.innerHTML = cache.get(key);
+      return;
+    }
+
+    try {
+      const url = `${PANEL_BASE}/${key}.html`;
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const html = await res.text();
+      cache.set(key, html);
+      panelInner.innerHTML = html;
+    } catch (err) {
+      panelInner.innerHTML =
+        `<h3 style="margin:0 0 10px;">불러오기 실패</h3>
+         <p style="margin:0; color:rgba(0,0,0,.55); line-height:1.7;">
+           /panel/${key}.html 파일을 찾을 수 없거나 서버에서 읽을 수 없습니다.
+         </p>`;
+      console.error(err);
+    }
+  }
+
+  panelClose.addEventListener("click", closePanel);
+  panelBackdrop.addEventListener("click", closePanel);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePanel();
+  });
+
+  // 탭 클릭 → fetch 로드
+  navLinks.forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const key = a.getAttribute("href").replace("#", ""); // #about -> about
+      setActive(a);
+      history.pushState({ key }, "", `#${key}`); // URL만 변경(선택)
+      loadPanel(key);
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+  if (isClosingByUI) return; // ✅ 닫기에서 URL 바꾸는 과정이면 무시
+
+  const key = location.hash.replace("#", "");
+  if (!key) {
+    setActive(null);
+    closePanel({ clearHash: false });
+    return;
+  }
+
+  const link = navLinks.find((a) => a.getAttribute("href") === `#${key}`);
+  setActive(link || null);
+  loadPanel(key);
+});
+
+
+  // 최초 진입 시 해시가 있으면 해당 패널 오픈
+  (function initFromHash() {
+    const key = location.hash.replace("#", "");
+    if (!key) return;
+    const link = navLinks.find((a) => a.getAttribute("href") === `#${key}`);
+    setActive(link || null);
+    loadPanel(key);
+  })();
+
+      document
+        .querySelectorAll("section[id]")
+        .forEach((sec) => io.observe(sec));
+
+      function handleSubmit(e) {
+        e.preventDefault();
+        alert("전송 데모입니다. 실제 전송은 백엔드/메일 연동으로 연결하세요.");
+        e.target.reset();
+        return false;
+      }
+    </script>
+  </body>
+</html>
