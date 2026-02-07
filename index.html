@@ -798,6 +798,16 @@
     navLinks.forEach((a) => a.classList.remove("active"));
     if (linkEl) linkEl.classList.add("active");
   }
+  function scrollToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  // ✅ viewport(유일 스크롤 영역) 기준으로 해당 섹션 위치로 스크롤
+  const top =
+    target.getBoundingClientRect().top - viewport.getBoundingClientRect().top + viewport.scrollTop;
+
+  viewport.scrollTo({ top, behavior: "smooth" });
+}
 
   function openPanel() {
     panel.classList.add("is-open");
@@ -898,20 +908,36 @@ panelInner.addEventListener("click", (e) => {
   });
 
   // 탭 클릭 → fetch 로드
-  navLinks.forEach((a) => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      const key = a.getAttribute("href").replace("#", ""); // #about -> about
-      setActive(a);
-      history.pushState({ key }, "", `#${key}`); // URL만 변경(선택)
-      loadPanel(key);
-    });
-  });
+  const SCROLL_KEYS = new Set(["home", "contact"]); // ✅ 패널 대신 스크롤로 처리할 메뉴
 
-  window.addEventListener("popstate", () => {
-  if (isClosingByUI) return; // ✅ 닫기에서 URL 바꾸는 과정이면 무시
+navLinks.forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const key = a.getAttribute("href").replace("#", "");
+
+    setActive(a);
+
+    // ✅ HOME/CONTACT는 패널 열지 않고 스크롤 이동
+    if (SCROLL_KEYS.has(key)) {
+      // 패널이 열려있다면 닫기(선택)
+      if (panel.classList.contains("is-open")) closePanel({ clearHash: false });
+
+      history.pushState({ key }, "", `#${key}`); // URL 해시 유지(원치 않으면 이 줄 삭제)
+      scrollToSection(key);
+      return;
+    }
+
+    // ✅ 나머지는 기존처럼 패널 오픈 + fetch
+    history.pushState({ key }, "", `#${key}`);
+    loadPanel(key);
+  });
+});
+
+window.addEventListener("popstate", () => {
+  if (isClosingByUI) return;
 
   const key = location.hash.replace("#", "");
+
   if (!key) {
     setActive(null);
     closePanel({ clearHash: false });
@@ -920,18 +946,34 @@ panelInner.addEventListener("click", (e) => {
 
   const link = navLinks.find((a) => a.getAttribute("href") === `#${key}`);
   setActive(link || null);
+
+  // ✅ HOME/CONTACT는 스크롤
+  if (SCROLL_KEYS.has(key)) {
+    if (panel.classList.contains("is-open")) closePanel({ clearHash: false });
+    scrollToSection(key);
+    return;
+  }
+
+  // ✅ 나머지는 패널
   loadPanel(key);
 });
 
 
-  // 최초 진입 시 해시가 있으면 해당 패널 오픈
-  (function initFromHash() {
-    const key = location.hash.replace("#", "");
-    if (!key) return;
-    const link = navLinks.find((a) => a.getAttribute("href") === `#${key}`);
-    setActive(link || null);
-    loadPanel(key);
-  })();
+(function initFromHash() {
+  const key = location.hash.replace("#", "");
+  if (!key) return;
+
+  const link = navLinks.find((a) => a.getAttribute("href") === `#${key}`);
+  setActive(link || null);
+
+  if (SCROLL_KEYS.has(key)) {
+    scrollToSection(key);
+    return;
+  }
+
+  loadPanel(key);
+})();
+
 
       function handleSubmit(e) {
         e.preventDefault();
