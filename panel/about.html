@@ -1,41 +1,375 @@
-<section style="padding: 8px 0 0;">
-    <h2 style="margin:0; font-size:44px; font-weight:300; letter-spacing:-0.4px; color:rgba(0,0,0,.58);">
-      About
-    </h2>
-    <p style="margin:12px 0 0; font-size:12px; line-height:1.8; color:rgba(0,0,0,.45); max-width: 560px;">
-      블루메츠는 ‘정직한 맛’의 기준을 지키기 위해 재료, 숙성, 배합, 조리의 모든 단계를
-      일관된 품질로 관리합니다.
-    </p>
-  
-    <div style="margin-top:28px; border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.12);">
-      <img
-        src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600&auto=format&fit=crop"
-        alt="About"
-        style="width:100%; display:block;"
-      />
-    </div>
-  
-    <div style="margin-top:26px; display:grid; gap:14px;">
-      <div style="border-top:1px solid rgba(0,0,0,.18); padding-top:14px;">
-        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Philosophy</div>
-        <div style="margin-top:6px; font-size:12px; line-height:1.85; color:rgba(0,0,0,.45);">
-          본질을 지키는 정성. 빠르게 타협하지 않고, 기본을 가장 단단하게 쌓습니다.
-        </div>
-      </div>
-  
-      <div style="border-top:1px solid rgba(0,0,0,.18); padding-top:14px;">
-        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Craft</div>
-        <div style="margin-top:6px; font-size:12px; line-height:1.85; color:rgba(0,0,0,.45);">
-          독일 전통 공정에서 출발해, 현대의 위생/온도/시간 관리 기준을 결합합니다.
-        </div>
-      </div>
-  
-      <div style="border-top:1px solid rgba(0,0,0,.18); padding-top:14px;">
-        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Taste</div>
-        <div style="margin-top:6px; font-size:12px; line-height:1.85; color:rgba(0,0,0,.45);">
-          과하지 않은 양념과 정확한 익힘으로, 재료가 가진 향과 식감을 선명하게 보여줍니다.
-        </div>
+<section class="bmz-about">
+  <!-- Intro -->
+  <div class="bmz-about__intro">
+    <div class="bmz-about__logo" aria-hidden="true">
+      <!-- 네 사이트 마크 SVG 있으면 교체 -->
+      <img src="../assets/img/logo.png">
+      <div class="bmz-about__wordmark">
+        <div class="bmz-about__name">BLUEMETZ</div>
+        <div class="bmz-about__sub">TASTE OF TRADITION</div>
       </div>
     </div>
-  </section>
-  
+
+    <div class="bmz-about__copy">
+      <p>
+        블루메쯔는 단순히 고기를 파는 곳을 넘어, <br />
+        고기에 대한 존중과 정성을 담아 아름다운 요리로 탄생시키는 공간입니다.
+      </p>
+      <p>
+        독일 전통 레시피, 정직한 재료, 그리고 <br />
+        조리의 온도와 시간까지 — 본질에 집중합니다.
+      </p>
+
+      <p class="bmz-about__quote">
+        “Delicious must be beautiful.”<br />
+        <span>— BLUEMETZ</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="bmz-about__section">
+    <div class="bmz-about__kicker">MEISTER</div>
+
+    <!-- Meister -->
+    <div class="bmz-about__person">
+      <div class="bmz-about__portrait">
+        <!-- ✅ 인물컷(투명PNG/흑백 추천). 없으면 일단 이미지로 -->
+        <img src="../assets/img/meister.jpg" alt="Meister" />
+      </div>
+
+      <div class="bmz-about__personText">
+        <h3 class="bmz-about__personName">유병관</h3>
+        <p class="bmz-about__personDesc">
+          독일 전통 육가공 기술과 조리 철학을 바탕으로, <br />
+          소시지와 고기의 ‘본연의 아름다움’을 식탁 위로 옮깁니다.
+        </p>
+
+        <!--         <div class="bmz-about__meta">
+          <div class="bmz-about__metaRow">
+            <div class="bmz-about__metaTitle">Philosophy</div>
+            <div class="bmz-about__metaBody">
+              단순한 자극보다, 오래 남는 균형감.
+            </div>
+          </div>
+          <div class="bmz-about__metaRow">
+            <div class="bmz-about__metaTitle">Focus</div>
+            <div class="bmz-about__metaBody">
+              전통 레시피 · 숙성 · 조리 온도.
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- (선택) 두 번째 인물 -->
+    <!--     <div class="bmz-about__person bmz-about__person--alt">
+      <div class="bmz-about__portrait">
+        <img src="../assets/img/meister-2.png" alt="Team member" />
+      </div>
+
+      <div class="bmz-about__personText">
+        <h3 class="bmz-about__personName">Team</h3>
+        <p class="bmz-about__personDesc">
+          좋은 한 끼의 경험은 디테일에서 완성됩니다. <br />
+          접시의 온도, 소스의 농도, 한 점의 두께까지.
+        </p>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- Gallery -->
+  <div class="bmz-about__section">
+    <div class="bmz-about__kicker bmz-about__kicker--left">GALLERY</div>
+
+    <div class="bmz-gallery masonry">
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/bowls-1.jpg" alt=""></a>
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/bowls-2.jpg" alt=""></a>
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/bowls-3.jpg" alt=""></a>
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/hero-1.jpg" alt=""></a>
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/hero-2.jpg" alt=""></a>
+      <a class="bmz-gallery__item" href="#"><img src="../assets/img/hero-3.jpg" alt=""></a>
+    </div>
+
+  </div>
+
+  <style>
+    /* ===== ABOUT (MOSU-ish) ===== */
+    .bmz-about {
+      --bg: #f2f2f0;
+      --text: rgba(0, 0, 0, .72);
+      --muted: rgba(0, 0, 0, .45);
+      --hair: rgba(0, 0, 0, .12);
+      --card: rgba(0, 0, 0, .06);
+      --radius: 18px;
+
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 10px 0 28px;
+      color: var(--text);
+    }
+
+    .bmz-about__intro {
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      padding: 56px 0 90px;
+      text-align: center;
+    }
+
+    .bmz-about__logo {
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+      margin-bottom: 26px;
+      opacity: .95;
+    }
+
+    .bmz-about__logo img {
+      width: 44px;
+      fill: rgba(0, 0, 0, .35);
+    }
+
+    .bmz-about__wordmark {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bmz-about__name {
+      font-size: 22px;
+      letter-spacing: .48em;
+      font-weight: 300;
+      color: rgba(0, 0, 0, .55);
+      transform: translateX(0.24em);
+    }
+
+    .bmz-about__sub {
+      font-size: 11px;
+      letter-spacing: .38em;
+      color: rgba(0, 0, 0, .35);
+      transform: translateX(0.19em);
+    }
+
+    .bmz-about__copy {
+      max-width: 720px;
+      font-size: 13px;
+      line-height: 2.05;
+      color: var(--muted);
+      display: grid;
+      gap: 14px;
+    }
+
+    .bmz-about__quote {
+      margin-top: 18px;
+      color: rgba(0, 0, 0, .50);
+      letter-spacing: .02em;
+    }
+
+    .bmz-about__quote span {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: .12em;
+      color: rgba(0, 0, 0, .38);
+    }
+
+    .bmz-about__section {
+      padding: 86px 0;
+      border-top: 1px solid rgba(0, 0, 0, .00);
+    }
+
+    .bmz-about__kicker {
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: .42em;
+      color: rgba(0, 0, 0, .45);
+      margin-bottom: 52px;
+      transform: translateX(.21em);
+    }
+
+    .bmz-about__kicker--left {
+      text-align: left;
+      transform: none;
+    }
+
+    .bmz-about__person {
+      display: grid;
+      justify-items: center;
+      gap: 26px;
+      margin: 0 auto 86px;
+    }
+
+    .bmz-about__portrait {
+      width: min(300px, 92%);
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: end center;
+      background: transparent;
+    }
+
+    .bmz-about__portrait img {
+      width: 72%;
+      max-width: 420px;
+      height: auto;
+      filter: grayscale(1);
+      opacity: .92;
+      transform: translateY(6px);
+      border-radius: 10px;
+    }
+
+    .bmz-about__personText {
+      text-align: center;
+      max-width: 760px;
+      padding: 0 10px;
+    }
+
+    .bmz-about__personName {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, .62);
+      letter-spacing: .02em;
+    }
+
+    .bmz-about__personDesc {
+      margin: 16px 0 0;
+      font-size: 13px;
+      line-height: 2.05;
+      color: rgba(0, 0, 0, .45);
+    }
+
+    .bmz-about__meta {
+      margin: 34px auto 0;
+      max-width: 640px;
+      border-top: 1px solid var(--hair);
+    }
+
+    .bmz-about__metaRow {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--hair);
+      text-align: left;
+      align-items: center;
+    }
+
+    .bmz-about__metaTitle {
+      font-size: 12px;
+      letter-spacing: .14em;
+      color: rgba(0, 0, 0, .55);
+    }
+
+    .bmz-about__metaBody {
+      font-size: 12px;
+      line-height: 1.9;
+      color: rgba(0, 0, 0, .42);
+    }
+
+    /* ===== Gallery grid (MOSU-ish) ===== */
+    .bmz-gallery.masonry {
+      column-count: 3;
+      column-gap: 18px;
+    }
+
+    .bmz-gallery.masonry .bmz-gallery__item {
+      display: block;
+      break-inside: avoid;
+      margin: 0 0 18px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, .06);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, .08);
+    }
+
+    .bmz-gallery.masonry .bmz-gallery__item img {
+      width: 100%;
+      height: auto;
+      /* ✅ columns masonry는 height:auto가 핵심 */
+      display: block;
+      filter: grayscale(1);
+      opacity: .92;
+    }
+
+    .span-5 {
+      grid-column: span 5;
+      aspect-ratio: 16/9;
+    }
+
+    .span-4 {
+      grid-column: span 4;
+      aspect-ratio: 4/3;
+    }
+
+    .span-3 {
+      grid-column: span 3;
+      aspect-ratio: 1/1;
+    }
+
+    .tall {
+      aspect-ratio: 3/4;
+    }
+
+    @media (max-width: 980px) {
+      .bmz-about {
+        padding: 6px 0 18px;
+      }
+
+      .bmz-about__intro {
+        min-height: 56vh;
+        padding: 36px 0 70px;
+      }
+
+      .bmz-about__metaRow {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .bmz-about__metaTitle {
+        opacity: .9;
+      }
+
+      .bmz-gallery.masonry {
+        column-count: 2;
+        column-gap: 12px;
+      }
+
+      .bmz-gallery.masonry .bmz-gallery__item {
+        margin-bottom: 12px;
+      }
+
+      .span-5 {
+        grid-column: span 6;
+      }
+
+      .span-4 {
+        grid-column: span 3;
+      }
+
+      .span-3 {
+        grid-column: span 3;
+      }
+
+      .tall {
+        aspect-ratio: 1/1;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .bmz-gallery.masonry {
+        column-count: 1;
+      }
+
+      .span-5,
+      .span-4,
+      .span-3 {
+        grid-column: span 2;
+        aspect-ratio: 16/10;
+      }
+
+      .tall {
+        aspect-ratio: 16/10;
+      }
+    }
+  </style>
+</section>

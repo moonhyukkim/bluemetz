@@ -27,10 +27,11 @@
 
         --radius: 14px;
 
-        --left-w: 420px;
+        --left-w: 440px;
         --gutter: 88px;
         --content-w: 1120px;
         --top-gap: 64px; /* 왼쪽/오른쪽 상단 여백 */
+        --top-right-gap: 50px; /* 왼쪽/오른쪽 상단 여백 */
       }
 
       * {
@@ -96,18 +97,13 @@
       .brand .logo {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 3px;
       }
       .brand .mark {
-        width: 44px;
-        height: 44px;
+        width: 65px;
+        height: 65px;
         display: grid;
         place-items: center;
-      }
-      .brand .mark svg {
-        width: 44px;
-        height: 44px;
-        fill: var(--blue);
       }
       .brand .name {
         font-weight: 700;
@@ -152,7 +148,7 @@
 
       /* ===== RIGHT ===== */
       main.right {
-        padding: var(--top-gap) var(--gutter) 0;
+        padding: var(--top-right-gap) var(--gutter) 0;
         overflow-x: hidden; /* swiper 안전 */
       }
       .container {
@@ -178,7 +174,9 @@
         line-height: 1.6;
 
       }
-
+.swiper-head {
+  text-align: right;
+}
       /* HERO */
       .hero {
         padding-top: 10px;
@@ -187,6 +185,7 @@
       .hero .hero-swiper {
         width: min(980px, 100%);
         margin-left: auto;
+        margin-top: 36px;
         border-radius: var(--radius);
         overflow: hidden;
         box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
@@ -223,6 +222,7 @@
       }
       .hero .swiper-pagination-bullet {
         opacity: 0.5;
+        background-color: #f2f2f0;
       }
       .hero .swiper-pagination-bullet-active {
         opacity: 1;
@@ -494,6 +494,10 @@
           z-index: 10;
           gap: 16px;
         }
+              .brand .mark {
+        width: 44px;
+        height: 44px;
+      }
         .brand .name {
           font-size: 28px;
         }
@@ -545,14 +549,7 @@
           <div class="brand">
             <div class="logo">
               <div class="mark" aria-hidden="true">
-                <svg viewBox="0 0 64 64">
-                  <path
-                    d="M32 14c6 0 10-4 14-4 3 0 6 2 6 5 0 5-6 9-14 9l-2 2v6c0 2-2 4-4 4s-4-2-4-4v-6l-2-2C18 24 12 20 12 15c0-3 3-5 6-5 4 0 8 4 14 4Z"
-                  />
-                  <path
-                    d="M20 36c0 10 6 16 12 16s12-6 12-16h-5c0 6-3 10-7 10s-7-4-7-10h-5Z"
-                  />
-                </svg>
+                <img src="assets/img/logo.png">
               </div>
               <div class="name">BLUEMETZ</div>
             </div>
@@ -578,6 +575,12 @@
         <main class="right">
           <div class="container">
             <section id="home" class="hero">
+              <div class="swiper-head">
+                            <h2 class="section-title">Delicious Must Be Beautiful</h2>
+              <p class="section-sub">
+맛있는 것은 아름다워야 합니다. 한국에서 아름답게 풀어내는 독일의 전통 정육 철학과 수제 육가공의 깊은 맛을 경험하세요.
+              </p>
+              </div>
               <div class="swiper hero-swiper" aria-label="Hero slider">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
@@ -601,11 +604,11 @@
                 </div>
 
                 <div class="swiper-pagination"></div>
-                <div
+<!--                 <div
                   class="swiper-button-prev"
                   aria-label="Previous slide"
                 ></div>
-                <div class="swiper-button-next" aria-label="Next slide"></div>
+                <div class="swiper-button-next" aria-label="Next slide"></div> -->
               </div>
             </section>
 
@@ -644,7 +647,7 @@
               <h2 class="section-title">Stores</h2>
               <p class="section-sub">
                 가장 맛있는 순간이 가장 아름다운 기억으로 남을 수 있도록,
-                블루메쯔는 오늘도 마이스터의 조리소리를 삶의 장면으로
+                블루메쯔는 오늘도 마이스터의 손길을 삶의 장면으로
                 이어갑니다.
               </p>
 
@@ -841,6 +844,7 @@ function closePanel({ clearHash = true } = {}) {
       const html = await res.text();
       cache.set(key, html);
       panelInner.innerHTML = html;
+      if (key === "stores") initStoresSwiper();
     } catch (err) {
       panelInner.innerHTML =
         `<h3 style="margin:0 0 10px;">불러오기 실패</h3>
@@ -903,6 +907,43 @@ function closePanel({ clearHash = true } = {}) {
         e.target.reset();
         return false;
       }
+
+      function initStoresSwiper() {
+  // 광화문
+  const gwMainEl = document.querySelector("#gwMain");
+  const gwThumbsEl = document.querySelector("#gwThumbs");
+  if (gwMainEl && gwThumbsEl) {
+    const gwThumbs = new Swiper(gwThumbsEl, {
+      watchSlidesProgress: true,
+      allowTouchMove: false, // 그리드 유지
+    });
+
+    new Swiper(gwMainEl, {
+      loop: true,
+      speed: 650,
+      autoplay: { delay: 3200, disableOnInteraction: false },
+      thumbs: { swiper: gwThumbs },
+    });
+  }
+
+  // 수내
+  const suMainEl = document.querySelector("#suMain");
+  const suThumbsEl = document.querySelector("#suThumbs");
+  if (suMainEl && suThumbsEl) {
+    const suThumbs = new Swiper(suThumbsEl, {
+      watchSlidesProgress: true,
+      allowTouchMove: false,
+    });
+
+    new Swiper(suMainEl, {
+      loop: true,
+      speed: 650,
+      autoplay: { delay: 3200, disableOnInteraction: false },
+      thumbs: { swiper: suThumbs },
+    });
+  }
+}
+
     </script>
   </body>
 </html>

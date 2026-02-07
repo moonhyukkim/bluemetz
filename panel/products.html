@@ -1,59 +1,350 @@
 <section style="padding: 8px 0 0;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <!-- Title -->
     <h2 style="margin:0; font-size:44px; font-weight:300; letter-spacing:-0.4px; color:rgba(0,0,0,.58);">
-      Products
+      Our Products
     </h2>
-    <p style="margin:12px 0 0; font-size:12px; line-height:1.8; color:rgba(0,0,0,.45); max-width: 560px;">
-      수 세기를 이어온 레시피에, 누군가의 소중한 한 끼를 생각하는 진심을 더했습니다.
-      시그니처 볼과 플래터를 소개합니다.
+    <p style="margin:12px 0 0; font-size:12px; line-height:1.8; color:rgba(0,0,0,.45); max-width: 720px;">
+      수 세기를 이어온 레시피에, 누군가의 소중한 한 끼를 생각하는 진심을 더했습니다.<br/>
+      고기와 소시지의 품격을 감성적으로 전달하는 <b style="font-weight:500; color:rgba(0,0,0,.62);">Taste of Tradition</b> 카탈로그입니다.
     </p>
-  
-    <div style="margin-top:26px; display:grid; gap:16px;">
-      <div style="border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.12); background:#ddd;">
-        <img
-          src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600&auto=format&fit=crop"
-          alt="Product 1"
-          style="width:100%; display:block;"
-        />
-      </div>
-  
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-        <div style="border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.12); background:#ddd;">
-          <img
-            src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop"
-            alt="Product 2"
-            style="width:100%; display:block;"
-          />
+
+    <!-- Hero / Banner -->
+    <div style="margin-top:26px; border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.12); background:#ddd; position:relative;">
+      <img
+        src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=2000&auto=format&fit=crop"
+        alt="Taste of Tradition"
+        style="width:100%; display:block; aspect-ratio: 16/7; object-fit:cover;"
+      />
+      <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,.40), rgba(0,0,0,.06), rgba(0,0,0,0));"></div>
+      <div style="position:absolute; left:20px; bottom:18px; right:20px;">
+        <div style="font-size:12px; letter-spacing:.12em; color:rgba(255,255,255,.75);">
+          TASTE OF TRADITION
         </div>
-        <div style="border-radius:14px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.12); background:#ddd;">
-          <img
-            src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop"
-            alt="Product 3"
-            style="width:100%; display:block;"
-          />
+        <div style="margin-top:6px; font-size:18px; font-weight:500; color:#fff;">
+          정통 육가공의 깊은 풍미, 매장에서 가장 좋은 상태로
         </div>
       </div>
     </div>
-  
-    <div style="margin-top:26px; display:grid; gap:14px;">
-      <div style="border-top:1px solid rgba(0,0,0,.18); padding-top:14px;">
-        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Our Bowls</div>
-        <div style="margin-top:6px; font-size:12px; line-height:1.85; color:rgba(0,0,0,.45);">
-          고기의 식감과 소시지의 풍미가 조화되는 균형감 있는 구성. 과하지 않게, 오래 기억되는 맛.
+
+    <!-- Category Tabs -->
+    <div style="margin-top:22px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+      <button class="bmz-tab is-active" data-cat="all" type="button">All</button>
+      <button class="bmz-tab" data-cat="sausage" type="button">Sausage</button>
+      <button class="bmz-tab" data-cat="ham" type="button">Ham</button>
+      <button class="bmz-tab" data-cat="meat" type="button">Butchery</button>
+      <button class="bmz-tab" data-cat="set" type="button">Set</button>
+
+      <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+        <div style="font-size:12px; color:rgba(0,0,0,.45); letter-spacing:.06em;">
+          ORDER
         </div>
+        <a
+          href="https://pf.kakao.com/"
+          target="_blank"
+          rel="noopener"
+          style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 14px; border-radius:999px; border:1px solid rgba(0,0,0,.18); background:rgba(255,255,255,.5); font-size:12px; letter-spacing:.10em; color:rgba(0,0,0,.78);"
+        >
+          KAKAO TALK ORDER →
+        </a>
       </div>
-  
+    </div>
+
+    <!-- Divider -->
+    <div style="margin-top:18px; height:1px; background:rgba(0,0,0,.12);"></div>
+
+    <!-- Catalog Grid -->
+    <div class="bmz-products-grid" style="margin-top:22px; display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+      <!-- Card 1 -->
+      <article class="bmz-card" data-cat="sausage">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop" alt="Bratwurst Classic"/>
+          <div class="bmz-tag">SAUSAGE</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Bratwurst Classic</h3>
+            <div class="bmz-origin">Origin: Germany</div>
+          </div>
+          <p class="bmz-card-desc">
+            육즙이 터지는 식감과 허브 향의 균형. 담백하지만 오래 남는 정통 풍미.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Peppery · Juicy · Clean finish</div>
+            <div><b>Pairing</b> Mustard · Lager</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="bmz-card" data-cat="ham">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600&auto=format&fit=crop" alt="Smoked Ham Slice"/>
+          <div class="bmz-tag">HAM</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Smoked Ham Slice</h3>
+            <div class="bmz-origin">Origin: EU</div>
+          </div>
+          <p class="bmz-card-desc">
+            은은한 훈연 향과 촉촉한 결. 샌드위치부터 플래터까지 활용도 높은 클래식.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Smoky · Mild · Silky</div>
+            <div><b>Pairing</b> Pickles · White wine</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="bmz-card" data-cat="meat">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1600&auto=format&fit=crop" alt="Dry Aged Cut"/>
+          <div class="bmz-tag">BUTCHERY</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Dry-Aged Cut</h3>
+            <div class="bmz-origin">Origin: Australia</div>
+          </div>
+          <p class="bmz-card-desc">
+            숙성이 만든 깊은 감칠맛. 강한 향보다 균형감 있는 고급스러운 여운.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Umami · Rich · Balanced</div>
+            <div><b>Pairing</b> Red wine · Charcoal</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="bmz-card" data-cat="set">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=1600&auto=format&fit=crop" alt="Signature Platter"/>
+          <div class="bmz-tag">SET</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Signature Platter</h3>
+            <div class="bmz-origin">Chef Selection</div>
+          </div>
+          <p class="bmz-card-desc">
+            소시지·햄·정육을 한 번에. 매장의 베스트를 가장 아름다운 구성으로.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Variety · Bold · Comfort</div>
+            <div><b>Pairing</b> Beer · Bread · Salad</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="bmz-card" data-cat="sausage">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1598514982541-8a6d3b2d97b1?q=80&w=1600&auto=format&fit=crop" alt="Herb Sausage"/>
+          <div class="bmz-tag">SAUSAGE</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Herb Sausage</h3>
+            <div class="bmz-origin">Origin: Germany</div>
+          </div>
+          <p class="bmz-card-desc">
+            허브의 산뜻함을 살린 레시피. 부담 없이 즐기는 데일리 시그니처.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Herbal · Light · Aromatic</div>
+            <div><b>Pairing</b> Lemon · Lager</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="bmz-card" data-cat="ham">
+        <div class="bmz-card-media">
+          <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?q=80&w=1600&auto=format&fit=crop" alt="Cured Ham"/>
+          <div class="bmz-tag">HAM</div>
+        </div>
+        <div class="bmz-card-body">
+          <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+            <h3 class="bmz-card-title">Cured Ham</h3>
+            <div class="bmz-origin">Origin: Spain</div>
+          </div>
+          <p class="bmz-card-desc">
+            짭조름한 감칠맛과 부드러운 질감. 얇게 썰어 플래터로 즐기기 좋습니다.
+          </p>
+          <div class="bmz-notes">
+            <div><b>Taste</b> Salty · Umami · Nutty</div>
+            <div><b>Pairing</b> Olive · Sparkling</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Bottom CTA (Offline / Kakao) -->
+    <div style="margin-top:26px; display:grid; gap:12px;">
       <div style="border-top:1px solid rgba(0,0,0,.18); padding-top:14px;">
-        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Sausage</div>
-        <div style="margin-top:6px; font-size:12px; line-height:1.85; color:rgba(0,0,0,.45);">
-          정통 배합을 바탕으로, 매장에서 가장 좋은 상태로 조리해 제공합니다.
+        <div style="font-size:12px; color:rgba(0,0,0,.75); font-weight:500;">Purchase 안내</div>
+        <div style="margin-top:6px; font-size:12px; line-height:1.9; color:rgba(0,0,0,.45); max-width:820px;">
+          구매는 <b style="font-weight:500; color:rgba(0,0,0,.60);">오프라인 매장</b> 또는
+          <b style="font-weight:500; color:rgba(0,0,0,.60);">카카오톡 주문</b>으로 진행됩니다.<br/>
+          원하시는 구성(소시지/햄/정육/세트)과 수량을 남겨주시면, 가장 좋은 상태로 준비해드립니다.
+        </div>
+
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a
+            href="https://pf.kakao.com/"
+            target="_blank"
+            rel="noopener"
+            style="display:inline-flex; align-items:center; justify-content:center; height:42px; padding:0 16px; border-radius:999px; border:1px solid rgba(0,0,0,.18); background:rgba(255,255,255,.6); font-size:12px; letter-spacing:.12em; color:rgba(0,0,0,.78);"
+          >
+            KAKAO TALK ORDER →
+          </a>
+          <a
+            href="#stores"
+            class="js-nav"
+            style="display:inline-flex; align-items:center; justify-content:center; height:42px; padding:0 16px; border-radius:999px; border:1px solid rgba(0,0,0,.18); font-size:12px; letter-spacing:.12em; color:rgba(0,0,0,.58);"
+          >
+            VISIT STORES →
+          </a>
         </div>
       </div>
     </div>
-  
+
+    <!-- Styles -->
     <style>
-      @media (max-width: 980px) {
-        section > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .bmz-tab{
+        height:40px;
+        padding:0 14px;
+        border-radius:999px;
+        border:1px solid rgba(0,0,0,.18);
+        background: rgba(255,255,255,.5);
+        font-size:12px;
+        letter-spacing:.10em;
+        color: rgba(0,0,0,.65);
+        cursor:pointer;
+        transition: transform .15s ease, background .15s ease, color .15s ease, opacity .15s ease;
+      }
+      .bmz-tab:hover{ transform: translateY(-1px); }
+      .bmz-tab.is-active{
+        background: rgba(0,0,0,.82);
+        color:#fff;
+        border-color: rgba(0,0,0,.82);
+      }
+
+      .bmz-card{
+        border-radius:14px;
+        overflow:hidden;
+        background: rgba(255,255,255,.25);
+        box-shadow: 0 18px 50px rgba(0,0,0,.10);
+        border: 1px solid rgba(0,0,0,.10);
+        display:flex;
+        flex-direction:column;
+        min-height: 100%;
+      }
+      .bmz-card-media{
+        position:relative;
+        background:#ddd;
+        overflow:hidden;
+      }
+      .bmz-card-media img{
+        width:100%;
+        height: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display:block;
+      }
+      .bmz-tag{
+        position:absolute;
+        left:12px;
+        top:12px;
+        padding:8px 10px;
+        border-radius:999px;
+        background: rgba(0,0,0,.70);
+        color:#fff;
+        font-size:11px;
+        letter-spacing:.12em;
+      }
+      .bmz-card-body{
+        padding:14px 14px 16px;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      .bmz-card-title{
+        margin:0;
+        font-size:14px;
+        font-weight:500;
+        color: rgba(0,0,0,.78);
+        letter-spacing:-.2px;
+      }
+      .bmz-origin{
+        font-size:11px;
+        color: rgba(0,0,0,.45);
+        letter-spacing:.06em;
+        white-space:nowrap;
+        margin-top:2px;
+      }
+      .bmz-card-desc{
+        margin:0;
+        font-size:12px;
+        line-height:1.85;
+        color: rgba(0,0,0,.45);
+      }
+      .bmz-notes{
+        margin-top:auto;
+        border-top:1px solid rgba(0,0,0,.10);
+        padding-top:10px;
+        display:grid;
+        gap:6px;
+        font-size:11px;
+        line-height:1.7;
+        color: rgba(0,0,0,.45);
+      }
+      .bmz-notes b{
+        font-weight:500;
+        color: rgba(0,0,0,.65);
+      }
+
+      @media (max-width: 980px){
+        .bmz-products-grid{
+          grid-template-columns: 1fr !important;
+        }
       }
     </style>
-  </section>
-  
+
+    <!-- Script (filter) -->
+    <script>
+      (function(){
+        const root = document.currentScript.closest("section") || document;
+        const tabs = Array.from(root.querySelectorAll(".bmz-tab"));
+        const cards = Array.from(root.querySelectorAll(".bmz-card"));
+
+        function setActive(tab){
+          tabs.forEach(t => t.classList.remove("is-active"));
+          tab.classList.add("is-active");
+        }
+
+        function apply(cat){
+          cards.forEach(card => {
+            const ok = (cat === "all") || (card.dataset.cat === cat);
+            card.style.display = ok ? "" : "none";
+          });
+        }
+
+        tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+            const cat = tab.dataset.cat;
+            setActive(tab);
+            apply(cat);
+          });
+        });
+
+        // init
+        const initTab = tabs.find(t => t.dataset.cat === "all") || tabs[0];
+        if (initTab) { setActive(initTab); apply("all"); }
+      })();
+    </script>
+  </div>
+</section>
