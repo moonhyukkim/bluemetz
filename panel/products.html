@@ -314,37 +314,5 @@
       }
     </style>
 
-    <!-- Script (filter) -->
-    <script>
-      (function(){
-        const root = document.currentScript.closest("section") || document;
-        const tabs = Array.from(root.querySelectorAll(".bmz-tab"));
-        const cards = Array.from(root.querySelectorAll(".bmz-card"));
-
-        function setActive(tab){
-          tabs.forEach(t => t.classList.remove("is-active"));
-          tab.classList.add("is-active");
-        }
-
-        function apply(cat){
-          cards.forEach(card => {
-            const ok = (cat === "all") || (card.dataset.cat === cat);
-            card.style.display = ok ? "" : "none";
-          });
-        }
-
-        tabs.forEach(tab => {
-          tab.addEventListener("click", () => {
-            const cat = tab.dataset.cat;
-            setActive(tab);
-            apply(cat);
-          });
-        });
-
-        // init
-        const initTab = tabs.find(t => t.dataset.cat === "all") || tabs[0];
-        if (initTab) { setActive(initTab); apply("all"); }
-      })();
-    </script>
   </div>
 </section>

@@ -845,6 +845,7 @@ function closePanel({ clearHash = true } = {}) {
       cache.set(key, html);
       panelInner.innerHTML = html;
       if (key === "stores") initStoresSwiper();
+      if (key === "products") initProductsPanel();
     } catch (err) {
       panelInner.innerHTML =
         `<h3 style="margin:0 0 10px;">불러오기 실패</h3>
@@ -943,6 +944,25 @@ function closePanel({ clearHash = true } = {}) {
     });
   }
 }
+// ✅ products 탭: 동적 로딩 대응(이벤트 위임)
+panelInner.addEventListener("click", (e) => {
+  const tab = e.target.closest(".bmz-tab");
+  if (!tab) return;
+
+  const section = tab.closest("section");
+  if (!section) return;
+
+  const tabs = Array.from(section.querySelectorAll(".bmz-tab"));
+  const cards = Array.from(section.querySelectorAll(".bmz-card"));
+  const cat = tab.dataset.cat;
+
+  tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+
+  cards.forEach((card) => {
+    const ok = cat === "all" || card.dataset.cat === cat;
+    card.style.display = ok ? "" : "none";
+  });
+});
 
     </script>
   </body>
