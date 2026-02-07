@@ -827,7 +827,42 @@ function closePanel({ clearHash = true } = {}) {
   }
 }
 
+// ✅ products: 패널 로드 직후 초기 상태 적용(ALL 필터 적용)
+function initProductsPanel() {
+  const section = panelInner.querySelector("section");
+  if (!section) return;
 
+  const initTab =
+    section.querySelector('.bmz-tab[data-cat="all"]') ||
+    section.querySelector(".bmz-tab");
+
+  if (initTab) {
+    // 아래 위임 리스너가 처리하도록 "클릭"을 한번 발생
+    initTab.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  }
+}
+
+// ✅ products 탭: 동적 로딩 대응(이벤트 위임)
+panelInner.addEventListener("click", (e) => {
+  const tab = e.target.closest(".bmz-tab");
+  if (!tab) return;
+
+  const section = tab.closest("section");
+  if (!section) return;
+
+  const tabs = Array.from(section.querySelectorAll(".bmz-tab"));
+  const cards = Array.from(section.querySelectorAll(".bmz-card"));
+  const cat = tab.dataset.cat;
+
+  // active 처리
+  tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+
+  // 필터 처리
+  cards.forEach((card) => {
+    const ok = cat === "all" || card.dataset.cat === cat;
+    card.style.display = ok ? "" : "none";
+  });
+});
   async function loadPanel(key) {
     openPanel();
     panelInner.innerHTML = "<p style='margin:0; color:rgba(0,0,0,.55)'>Loading…</p>";
@@ -898,10 +933,6 @@ function closePanel({ clearHash = true } = {}) {
     loadPanel(key);
   })();
 
-      document
-        .querySelectorAll("section[id]")
-        .forEach((sec) => io.observe(sec));
-
       function handleSubmit(e) {
         e.preventDefault();
         alert("전송 데모입니다. 실제 전송은 백엔드/메일 연동으로 연결하세요.");
@@ -944,42 +975,6 @@ function closePanel({ clearHash = true } = {}) {
     });
   }
 }
-// ✅ products: 패널 로드 직후 초기 상태 적용(ALL 필터 적용)
-function initProductsPanel() {
-  const section = panelInner.querySelector("section");
-  if (!section) return;
-
-  const initTab =
-    section.querySelector('.bmz-tab[data-cat="all"]') ||
-    section.querySelector(".bmz-tab");
-
-  if (initTab) {
-    // 아래 위임 리스너가 처리하도록 "클릭"을 한번 발생
-    initTab.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  }
-}
-
-// ✅ products 탭: 동적 로딩 대응(이벤트 위임)
-panelInner.addEventListener("click", (e) => {
-  const tab = e.target.closest(".bmz-tab");
-  if (!tab) return;
-
-  const section = tab.closest("section");
-  if (!section) return;
-
-  const tabs = Array.from(section.querySelectorAll(".bmz-tab"));
-  const cards = Array.from(section.querySelectorAll(".bmz-card"));
-  const cat = tab.dataset.cat;
-
-  // active 처리
-  tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
-
-  // 필터 처리
-  cards.forEach((card) => {
-    const ok = cat === "all" || card.dataset.cat === cat;
-    card.style.display = ok ? "" : "none";
-  });
-});
 
     </script>
   </body>
